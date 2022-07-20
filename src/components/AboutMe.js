@@ -1,34 +1,36 @@
-import React from 'react';
-import { base_url } from '../utils/constants';
+import React from "react";
+import { base_url } from "../utils/constants";
 class AboutMe extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      name:'',
-      gender:'',
-      skinC:'',
-      hairC:'',
-      mass:'',
-      height:'',
-      eyeC:''
-    }
+      name: "",
+      gender: "",
+      skinC: "",
+      hairC: "",
+      mass: "",
+      height: "",
+      eyeC: "",
+    };
   }
   componentDidMount() {
     fetch(`${base_url}/v1/peoples/1`)
-      .then(response => response.json())
-      .then(data => this.setState({
-        name:data.name,
-        gender:data.gender,
-        eyeC:data.eye_color,
-        hairC:data.hair_color	,
-        height:data.height,
-        mass:data.mass,
-        skinC:data.skin_color,
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          name: data.name,
+          gender: data.gender,
+          eyeC: data.eye_color,
+          hairC: data.hair_color,
+          height: data.height,
+          mass: data.mass,
+          skinC: data.skin_color,
+        })
+      );
+  }
 
-      }))}
-
-    render() {
-      return(
+  render() {
+    return (
       <div>
         <h1>Name: {this.state.name}</h1>
         <div>Gender: {this.state.gender}</div>
@@ -38,10 +40,8 @@ class AboutMe extends React.Component {
         <div>height: {this.state.height}</div>
         <div>Eye color: {this.state.eyeC}</div>
       </div>
-      )
-    }
-
+    );
   }
+}
 
-
-export default AboutMe
+export default AboutMe;
