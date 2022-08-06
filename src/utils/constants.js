@@ -1,3 +1,4 @@
+import React from "react";
 import friend1 from '../Images/friend1.jpg';
 import friend2 from '../Images/friend2.jpg';
 import friend3 from '../Images/friend3.jpg';
@@ -8,6 +9,8 @@ import friend7 from '../Images/friend7.jpg';
 import friend8 from '../Images/friend8.jpg';
 import friend9 from '../Images/friend9.jpg';
 
+export const base_url = 'https://sw-info-api.herokuapp.com';
+export const periodMonth = 1000 * 60 * 60 * 24 * 30;
 
 export const friends = [
     friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9
@@ -21,7 +24,6 @@ The original film (Star Wars), retroactively subtitled Episode IV: A New Hope (1
 
 All nine films of the "Skywalker Saga" were nominated for Academy Awards, with wins going to the first two releases. Together with the theatrical live action "anthology" films Rogue One (2016) and Solo (2018), the combined box office revenue of the films equated to over US$10 billion, which makes it the second-highest-grossing film franchise of all time.[3][4] Additional upcoming films are in the works, including an untitled movie from Taika Waititi planned for 2023 and Rogue Squadron directed by Patty Jenkins, which currently does not have a release date.`
 
-export const base_url = 'https://sw-info-api.herokuapp.com';
 
 
-
+export const changePageContext = React.createContext();

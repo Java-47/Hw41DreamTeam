@@ -1,30 +1,39 @@
 import React from 'react';
 import style from '../css_modules/farGalaxy.module.css';
+import { base_url } from '../utils/constants';
 
-const FarGalaxy = () => {
-    return (
-        <p className={style.farGalaxy}>It is a period of civil war.
-            Rebel spaceships, striking
-            from a hidden base, have won
-            their first victory against
-            the evil Galactic Empire.
+class FarGalaxy extends React.Component {
+    constructor(props) {
+        super(props)
 
-            During the battle, Rebel
-            spies managed to steal secret
-            plans to the Empire's
-            ultimate weapon, the DEATH
-            STAR, an armored space
-            station with enough power
-            to destroy an entire planet.
+        this.state = {
+            opening_crawl: 'Loading...'
+        }
+    }
+    componentDidMount() {
+        const text = sessionStorage.getItem('opening_crawl');
+        if (text) {
+            this.setState({opening_crawl: text});
+        } else {
+            const episode = Math.floor(1 + Math.random() * 6);
+            fetch(`${base_url}/v1/films/${episode}`)
+                .then(response => response.json())
+                .then(data => {
+                    this.setState({ opening_crawl: data.opening_crawl });
+                    sessionStorage.setItem('opening_crawl', data.opening_crawl)
+                });
 
-            Pursued by the Empire's
-            sinister agents, Princess
-            Leia races home aboard her
-            starship, custodian of the
-            stolen plans that can save her
-            people and restore
-            freedom to the galaxy....</p>
-    )
+        }
+    }
+    componentWillUnmount(){
+        console.log('Component FarGalaxy unmounted');
+    }
+    render() {
+        return (
+            <p className={style.farGalaxy}>{this.state.opening_crawl}</p>
+        )
+    }
+
 }
 
 export default FarGalaxy

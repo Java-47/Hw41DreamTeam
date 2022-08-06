@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Main from './components/Main';
 import React from 'react';
 import { navItems } from './utils/constants';
-
+import { changePageContext } from './utils/constants';
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -21,7 +21,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+
+         <changePageContext.Provider value={
+         {
+          changePage: this.changePage
+          }}>
         <Header changePage={this.changePage}/>
+        </changePageContext.Provider>
+
         <Main currentPage={this.state.currentPage} />
         <Footer />
       </div>
