@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../css_modules/contact.module.css";
 import { base_url, periodMonth } from "../utils/constants";
 
-class Contact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      planets: ['wait...']
-    };
-  }
+const Contact = () => {
 
-  async fillPlanets(url) {
+  const [state,setThisState] = useState({planets: ['wait...']});
+  
+  const fillPlanets = async (url) =>{
     const response = await fetch(url);
     const json = await response.json();
     const planets = json.map(item => item.name);
-    this.setState({ planets });
+    setThisState({planets})
     const info = {
       payLoad: planets,
       time: Date.now()
@@ -23,21 +19,17 @@ class Contact extends React.Component {
 
   }
 
-  componentDidMount() {
+  useEffect(() => {
     const planets = JSON.parse(localStorage.getItem('planets'));
     if (!planets || (Date.now() - planets.time) > periodMonth) {
-      this.fillPlanets(`${base_url}/v1/planets`);
+      fillPlanets(`${base_url}/v1/planets`);
     } else {
-      this.setState({ planets: planets.payLoad });
+      setThisState({ planets: planets.payLoad })
+
     }
 
-  }
+  }, []);
 
-  componentWillUnmount() {
-    console.log('Component Contact unmounted');
-  }
-
-  render() {
     return (
       <div>
         <form onSubmit={(e) => {
@@ -48,7 +40,7 @@ class Contact extends React.Component {
           </label>
           <label>Planet
             <select name="planet">{
-              this.state.planets.map((item, index) => <option value={item} key={index}>{item}</option>)
+              state.planets.map((item, index) => <option value={item} key={index}>{item}</option>)
             }
             </select>
           </label>
@@ -59,7 +51,6 @@ class Contact extends React.Component {
         </form>
       </div>
     )
-  }
 }
 
 export default Contact;

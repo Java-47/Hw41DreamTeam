@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "../css_modules/aboutMe.module.css";
 import { base_url, periodMonth } from "../utils/constants";
 
-class AboutMe extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
+const AboutMe = () => {
 
-  componentDidMount() {
+  const [state,setThisState] = useState({})
+
+  useEffect(() => {
     let hero = JSON.parse(localStorage.getItem('hero'));
     if (!hero || (Date.now() - hero.time) > periodMonth) {
       fetch(`${base_url}/v1/peoples/1`)
@@ -24,7 +22,7 @@ class AboutMe extends React.Component {
             "birth_year": data.birth_year,
             "gender": data.gender
           };
-          this.setState({ hero: info });
+          setThisState({hero: info})
           hero = {
             payload: info,
             time: Date.now()
@@ -32,35 +30,30 @@ class AboutMe extends React.Component {
           localStorage.setItem('hero', JSON.stringify(hero));
         });
     } else {
-      this.setState({ hero: hero.payload });
+      setThisState({hero: hero.payload})
+
     }
 
 
-  }
-
-  componentWillUnmount() {
-    console.log('Component AboutMe unmounted');
-  }
-
-  render() {
+  }, []);
+  
     return (
       <div>
-        {(this.state.hero) &&
+        {(state.hero) &&
           <div className={`farGalaxy ${styles.hero_box}`}>
-            <p><span className={styles.hero_titles}>name:</span> {this.state.hero.name}</p>
-            <p><span className={styles.hero_titles}>height:</span> {this.state.hero.height}</p>
-            <p><span className={styles.hero_titles}>birth year:</span> {this.state.hero.birth_year}</p>
-            <p><span className={styles.hero_titles}>gender:</span> {this.state.hero.gender}</p>
-            <p><span className={styles.hero_titles}>mass:</span> {this.state.hero.mass}</p>
-            <p><span className={styles.hero_titles}>hair color:</span> {this.state.hero.hair_color}</p>
-            <p><span className={styles.hero_titles}>skin color:</span> {this.state.hero.skin_color}</p>
-            <p><span className={styles.hero_titles}>eye color:</span> {this.state.hero.eye_color}</p>
+            <p><span className={styles.hero_titles}>name:</span> {state.hero.name}</p>
+            <p><span className={styles.hero_titles}>height:</span> {state.hero.height}</p>
+            <p><span className={styles.hero_titles}>birth year:</span> {state.hero.birth_year}</p>
+            <p><span className={styles.hero_titles}>gender:</span> {state.hero.gender}</p>
+            <p><span className={styles.hero_titles}>mass:</span> {state.hero.mass}</p>
+            <p><span className={styles.hero_titles}>hair color:</span> {state.hero.hair_color}</p>
+            <p><span className={styles.hero_titles}>skin color:</span> {state.hero.skin_color}</p>
+            <p><span className={styles.hero_titles}>eye color:</span> {state.hero.eye_color}</p>
           </div>
         }
       </div>
     )
 
-  }
 }
 
 export default AboutMe;
