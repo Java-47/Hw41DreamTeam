@@ -26,4 +26,4 @@ All nine films of the "Skywalker Saga" were nominated for Academy Awards, with w
 
 
 
-export const changePageContext = React.createContext();
+export const ChangePageContext = React.createContext();

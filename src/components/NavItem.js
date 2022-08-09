@@ -1,13 +1,13 @@
 import React from 'react';
-import { changePageContext } from '../utils/constants';
+import { ChangePageContext } from '../utils/constants';
 const NavItem = ({itemTitle}) => {
   
   return (
-    <changePageContext.Consumer>
+    <ChangePageContext.Consumer>
       {({changePage}) => (
     <li onClick={() => changePage(itemTitle)} className="nav-item btn btn-danger mx-1">{itemTitle}</li>
       )}
-    </changePageContext.Consumer>
+    </ChangePageContext.Consumer>
       
   )
 }

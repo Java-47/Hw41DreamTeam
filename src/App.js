@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Main from './components/Main';
 import React, { useState } from 'react';
 import { navItems } from './utils/constants';
-import { changePageContext } from './utils/constants';
+import { ChangePageContext } from './utils/constants';
 const App = () =>
 {
   const [currentPage, setCurrentPage] = useState(navItems[0]);
@@ -15,12 +15,12 @@ const App = () =>
     return (
       <div className="container-fluid">
 
-         <changePageContext.Provider value={
+         <ChangePageContext.Provider value={
          {
           changePage
           }}>
         <Header changePage={changePage}/>
-        </changePageContext.Provider>
+        </ChangePageContext.Provider>
 
         <Main currentPage={currentPage} />
         <Footer />
