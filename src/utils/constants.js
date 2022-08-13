@@ -16,7 +16,13 @@ export const friends = [
     friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9
 ];
 
-export const navItems = ['Home', 'About me', 'Star Wars', 'Contact'];
+export const navItems = [
+    {title: 'Home', route: 'home'}, 
+    {title: 'About me', route: 'about_me'},
+    {title: 'Star Wars', route: 'star_wars'},
+    {title: 'Contact', route: 'contact'}
+];
+
 
 export const starWarsInfo = `Star Wars is an American epic space-opera[1] multimedia franchise created by George Lucas, which began with the eponymous 1977 film[b] and quickly became a worldwide pop-culture phenomenon. The franchise has been expanded into various films and other media, including television series, video games, novels, comic books, theme park attractions, and themed areas, comprising an all-encompassing fictional universe.[c] In 2020, its total value was estimated at US$70 billion, and it is currently the fifth-highest-grossing media franchise of all time.
 
@@ -24,6 +30,4 @@ The original film (Star Wars), retroactively subtitled Episode IV: A New Hope (1
 
 All nine films of the "Skywalker Saga" were nominated for Academy Awards, with wins going to the first two releases. Together with the theatrical live action "anthology" films Rogue One (2016) and Solo (2018), the combined box office revenue of the films equated to over US$10 billion, which makes it the second-highest-grossing film franchise of all time.[3][4] Additional upcoming films are in the works, including an untitled movie from Taika Waititi planned for 2023 and Rogue Squadron directed by Patty Jenkins, which currently does not have a release date.`
 
-
-
-export const ChangePageContext = React.createContext();
+export const ImgHeroContext = React.createContext();

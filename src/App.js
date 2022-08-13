@@ -2,32 +2,31 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { navItems } from './utils/constants';
-import { ChangePageContext } from './utils/constants';
-const App = () =>
-{
-  const [currentPage, setCurrentPage] = useState(navItems[0]);
 
-  const changePage = currentPage => {
-    setCurrentPage(currentPage);
+const App = props => {
+  const getItemByRoute = () => {
+    const route = window.location.hash.substring(2);
+    const page = navItems.find(item => item.route === route);
+    return page ?? navItems[0];
   }
-    return (
-      <div className="container-fluid">
+  const [currentPage, setCurrentPage] = useState(getItemByRoute());
 
-         <ChangePageContext.Provider value={
-         {
-          changePage
-          }}>
-        <Header changePage={changePage}/>
-        </ChangePageContext.Provider>
+  useEffect(() => {
+    window.addEventListener('hashchange', () => {
+      const page = getItemByRoute();
+      setCurrentPage(page);
+    })
+  }, []);
 
-        <Main currentPage={currentPage} />
-        <Footer />
-      </div>
-    );
-  
-
+  return (
+    <div className="container-fluid">
+      <Header changePage={setCurrentPage} />
+      <Main currentPage={currentPage} />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

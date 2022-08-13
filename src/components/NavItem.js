@@ -1,14 +1,13 @@
-import React from 'react';
-import { ChangePageContext } from '../utils/constants';
-const NavItem = ({itemTitle}) => {
-  
+import React from 'react'
+
+const NavItem = ({ itemTitle, changePage }) => {
   return (
-    <ChangePageContext.Consumer>
-      {({changePage}) => (
-    <li onClick={() => changePage(itemTitle)} className="nav-item btn btn-danger mx-1">{itemTitle}</li>
-      )}
-    </ChangePageContext.Consumer>
-      
+    <li
+      onClick={() => window.location.hash = `#/${itemTitle.route}`}
+      className="nav-item btn btn-danger mx-1">
+      {itemTitle.title}
+      {/* <a href={`#/${itemTitle.route}`}></a> */}     
+    </li>
   )
 }
 
